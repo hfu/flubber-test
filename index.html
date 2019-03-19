@@ -25,13 +25,13 @@ d3.json("https://hfu.github.io/gmjpn21pref/pref.geojson", function(err, geojson)
     var a = prefs[0],
         b = prefs[1],
         interpolator = flubber.interpolate(a, b)
-    states.push(prefs.shift());
+    prefs.push(prefs.shift());
     path.attr("d", interpolator(0));
     // Morph
     path.transition()
       .delay(100)
       .duration(800)
-      .attrTween("d", function() { return interpolator; })
+      .attrTween("d", function() { return interpolator })
       .on("end", draw);
   }
 })
