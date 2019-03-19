@@ -16,9 +16,13 @@ var svg = d3.select("svg"),
     path = svg.append("path");
 d3.json("https://hfu.github.io/gmjpn21pref/pref.geojson", function(err, geojson) {
   var prefs = geojson
-    .features.map(function(d) {
-      console.log(d.geometry.coordinates[0][0])
-      return d.geometry.coordinates[0][0]
+    .features.map(function(f) {
+      console.log(f.geometry.type)
+      if (f.geometry.type == 'Polygon') {
+        return f.geometry.coordinates[0]
+      } else {
+        return f.geometry.coordinates[0][0]
+      }
     })
   d3.shuffle(prefs)
   draw()
