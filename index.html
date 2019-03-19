@@ -18,7 +18,7 @@ d3.json("https://hfu.github.io/gmjpn21pref/pref.geojson", function(err, geojson)
   var prefs = geojson
     .features.map(function(f) {
       var nParts = (f.geometry.type == 'Polygon') ? 1 : f.geometry.coordinates.length
-      console.log(f.geometry.type + ': ' + nParts)
+      console.log(f.properties.name + ' ' + f.properties.code + ' ' + f.geometry.type + ': ' + nParts)
       if (f.geometry.type == 'Polygon') {
         return f.geometry.coordinates[0]
       } else {
